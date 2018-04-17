@@ -1,18 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, Fragment } from 'react';
 import './App.css';
-import MailTray from './Components/MailTray'
-import MailContent from './Components/MailContent'
+import MailTray from './components/MailTray';
+import MailContent from './components/MailContent';
+import { connect } from 'react-redux';
+import * as Actions from './actions/Index';
+import { bindActionCreators } from 'redux';
 
-class App extends Component {
+class App extends Component { 
+  componentDidMount(){
+    this.props.actions.InitialCharge();  
+  }
+
   render() {
     return(
-      <div>
-        <MailTray/>
-        <MailContent/>
-      </div>
+      <Fragment>
+        <MailTray mails={this.props.mails} ClickMail={this.props.actions.ClickMail}/>
+        <MailContent currentMail={this.props.currentMail}/>
+      </Fragment>     
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return{
+    mails: state.mails,
+    currentMail: null
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {  
+  return {actions: bindActionCreators(Actions, dispatch)}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps )(App);

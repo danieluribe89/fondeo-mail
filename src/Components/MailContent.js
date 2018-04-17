@@ -2,30 +2,45 @@ import React, { Component } from 'react';
 import circle from '../img/circle.png'; 
 import trash from '../img/trash.png';
 import spam from '../img/spam.png';
+import {connect} from 'react-redux';
 
 class MailContent extends Component{
+    renderMailContent(){
+        if(this.props.currentMail){
+            return(
+                <div>
+                    <div className="mail-section-subject">{this.props.currentMail.subject}</div>
+                    <div className="mail-section-actions">
+                        <img alt="" className="img-mail-actions" src={circle}/>
+                        <img alt="" className="img-mail-actions" src={trash}/>
+                        <img alt="" className="img-mail-actions" src={spam}/>
+                    </div>
+                    <div className="mail-section-content">
+                        <div className="mail-body-sender">
+                        {this.props.currentMail.subject} <a className="link">{this.props.currentMail.from}</a><br/><br/>
+                        </div>
+                        <div className="mail-body-date">
+                            {this.props.date}
+                        </div><br/>			
+                        {this.props.currentMail.body}
+                    </div>
+                </div>);
+        }
+    }
+
     render(){
         return(
-            <div class="mail-section">
-                <div class="mail-section-subject">¿Qué es Lorem Ipsum?</div>
-                <div class="mail-section-actions">
-                    <img alt="" class="img-mail-actions" src={circle}/>
-                    <img alt="" class="img-mail-actions" src={trash}/>
-                    <img alt="" class="img-mail-actions" src={spam}/>
-                </div>
-                <div class="mail-section-content">
-                    <div class="mail-body-sender">
-                        Amazon.com <a class="link">&lt;noreplay@amazon.com&gt;</a><br/><br/>
-                    </div>
-                    <div class="mail-body-date">
-                        Thursday, May 26, 11:09 A.M.
-                    </div><br/>			
-                    Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.<br/><br/>
-                    Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
-                </div>
+            <div className="mail-section">
+                { this.renderMailContent() }
             </div>
         );
     }
 }
 
-export default MailContent;
+const mapStateToProps = (state) => {
+    return{
+      currentMail: state.currentMail
+    }
+  }
+
+export default connect(mapStateToProps)(MailContent);

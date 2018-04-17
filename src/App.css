@@ -55,6 +55,17 @@ table {
 	width: 10px;
 }
 
+.img-unreaded{
+	width: 12px;
+	height: 12px;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	background: #4990E2;
+	float: left;
+	margin-right: 2px;
+}
+
 .link{
 	color: #4990E2;
 }
