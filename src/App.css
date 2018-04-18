@@ -43,6 +43,10 @@ table {
 	border-spacing: 0;
 }
 
+.blue{
+	color: blue !important;
+}
+
 .img-mail-actions{
 	margin-left: 9px;
 	height: 19px;
