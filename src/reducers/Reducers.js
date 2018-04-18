@@ -44,7 +44,7 @@ function MailReducer(state = InitialState, action){
             const newMails5 = [...state.mails.MailData];
             newMails5.unshift(action.mail);     
             const mails5 = { MailData: newMails5};
-            return Object.assign({}, state, { currentMail: {}, mails: mails5 });
+            return Object.assign({}, state, { mails: mails5 });
         default:
             return state;
     }
